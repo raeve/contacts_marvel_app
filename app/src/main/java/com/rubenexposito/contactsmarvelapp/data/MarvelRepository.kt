@@ -1,12 +1,13 @@
 package com.rubenexposito.contactsmarvelapp.data
 
-import com.rubenexposito.contactsmarvelapp.data.dto.GetCharactersResponse
+import com.rubenexposito.contactsmarvelapp.data.dto.MarvelCharacter
 import com.rubenexposito.contactsmarvelapp.data.network.MarvelApi
+import io.reactivex.Single
 
 interface MarvelRepository {
-    fun getCharacters(): GetCharactersResponse
+    fun getCharacters(): Single<List<MarvelCharacter>>
 }
 
 class MarvelRepositoryImpl(private val marvelApi: MarvelApi) : MarvelRepository {
-    override fun getCharacters(): GetCharactersResponse = marvelApi.getCharacters()
+    override fun getCharacters(): Single<List<MarvelCharacter>> = marvelApi.getCharacters()
 }
