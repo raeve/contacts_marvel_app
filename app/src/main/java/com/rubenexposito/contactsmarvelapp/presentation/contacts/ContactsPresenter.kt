@@ -17,7 +17,8 @@ class ContactsPresenter(private val view: ContactsContract.View, private val use
     override fun onPause() = useCase.clear()
 
     override fun onContactSelected(contact: Contact) {
-        //TODO: Manage contacts selected.
+        contact.selected = !contact.selected
+        view.addOrRemoveContact(contact)
     }
 
     internal fun onComplete(contacts: MutableList<Contact>) {

@@ -10,8 +10,10 @@ import com.rubenexposito.contactsmarvelapp.common.hide
 import com.rubenexposito.contactsmarvelapp.common.show
 import com.rubenexposito.contactsmarvelapp.domain.model.Contact
 import com.rubenexposito.contactsmarvelapp.presentation.contacts.adapter.ContactsAdapter
+import com.rubenexposito.contactsmarvelapp.presentation.contacts.adapter.SelectedContactsAdapter
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_contacts.*
+import kotlinx.android.synthetic.main.divider_layout.*
 import kotlinx.android.synthetic.main.layout_loading.*
 import javax.inject.Inject
 
@@ -21,6 +23,9 @@ class ContactsActivity : AppCompatActivity(), ContactsContract.View {
 
     @Inject
     lateinit var contactsAdapter: ContactsAdapter
+
+    @Inject
+    lateinit var selectedContactsAdapter: SelectedContactsAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +49,10 @@ class ContactsActivity : AppCompatActivity(), ContactsContract.View {
             adapter = contactsAdapter
             layoutManager = LinearLayoutManager(context)
         }
+        with(rvSelectedContacts) {
+            adapter = selectedContactsAdapter
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        }
     }
 
     override fun resetContacts() {
@@ -56,6 +65,23 @@ class ContactsActivity : AppCompatActivity(), ContactsContract.View {
         rvContacts.show()
         contactsAdapter.addContacts(contacts)
         contactsAdapter.notifyDataSetChanged()
+    }
+
+    override fun addOrRemoveContact(contact: Contact) {
+        var position = selectedContactsAdapter.addOrRemoveContact(contact)
+        if (position == -1) selectedContactsAdapter.notifyItemInserted(0)
+        else selectedContactsAdapter.notifyItemRemoved(position)
+
+        if (selectedContactsAdapter.itemCount > 0) {
+            rvSelectedContacts.show()
+            divider.show()
+        } else {
+            rvSelectedContacts.hide()
+            divider.hide()
+        }
+
+        position = contactsAdapter.updateContact(contact)
+        contactsAdapter.notifyItemChanged(position)
     }
 
     override fun showLoading() {

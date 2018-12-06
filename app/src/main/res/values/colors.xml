@@ -4,8 +4,12 @@
     <color name="colorPrimaryDark">#2E3D45</color>
     <color name="colorAccent">#45b1fe</color>
 
-    <color name="background_black">#2E3D45</color>
-    <color name="text_color_name">#FFFFFF</color>
-    <color name="text_color_phone">#BFBFBF</color>
+    <color name="black">#2E3D45</color>
+    <color name="white">#FFFFFF</color>
+    <color name="grey">#BFBFBF</color>
+    <color name="divider_color">#3C474C</color>
+    <color name="blue_transparent">#AA45b1fe</color>
+    <color name="white_transparent">#CCFFFFFF</color>
+
 
 </resources>

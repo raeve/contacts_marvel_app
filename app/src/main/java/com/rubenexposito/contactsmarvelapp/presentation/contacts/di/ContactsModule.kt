@@ -13,6 +13,7 @@ import com.rubenexposito.contactsmarvelapp.presentation.contacts.ContactsContrac
 import com.rubenexposito.contactsmarvelapp.presentation.contacts.ContactsPresenter
 import com.rubenexposito.contactsmarvelapp.presentation.contacts.adapter.ContactListener
 import com.rubenexposito.contactsmarvelapp.presentation.contacts.adapter.ContactsAdapter
+import com.rubenexposito.contactsmarvelapp.presentation.contacts.adapter.SelectedContactsAdapter
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -60,11 +61,16 @@ abstract class ContactsModule {
         @Provides
         @PerActivity
         @JvmStatic
-        fun provideContactListener(presenter: ContactsContract.Presenter) : ContactListener = presenter
+        fun provideContactListener(presenter: ContactsContract.Presenter): ContactListener = presenter
 
         @Provides
         @PerActivity
         @JvmStatic
-        fun provideAdapter(listener: ContactListener) = ContactsAdapter(listener)
+        fun provideContactsAdapter(listener: ContactListener) = ContactsAdapter(listener)
+
+        @Provides
+        @PerActivity
+        @JvmStatic
+        fun provideSelectedContactsAdapter(listener: ContactListener) = SelectedContactsAdapter(listener)
     }
 }

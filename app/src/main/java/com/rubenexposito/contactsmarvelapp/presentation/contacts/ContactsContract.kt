@@ -8,6 +8,7 @@ interface ContactsContract {
     interface View : BaseView {
         fun addContacts(contacts: MutableList<Contact>)
         fun resetContacts()
+        fun addOrRemoveContact(contact: Contact)
     }
 
     interface Presenter : ContactListener {

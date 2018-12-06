@@ -21,8 +21,7 @@ class ContactsAdapter(private val callback: ContactListener, var contacts: Mutab
         ContactViewHolder(parent.inflate(R.layout.item_contact))
 
     override fun getItemCount(): Int = contacts.size
-    override fun getItemId(position: Int): Long = position.toLong()
-
+    override fun getItemId(position: Int): Long = contacts[position].name.hashCode().toLong()
     override fun onBindViewHolder(holder: ContactViewHolder, position: Int) = with(holder) {
         val contact = contacts[position]
         bind(contact)
@@ -32,6 +31,15 @@ class ContactsAdapter(private val callback: ContactListener, var contacts: Mutab
     fun addContacts(contacts: MutableList<Contact>) {
         this.contacts.addAll(contacts)
         this.contacts = this.contacts.sortedWith(compareBy { it.name }).toMutableList()
+    }
+
+    fun updateContact(contact: Contact): Int {
+        val indexOf = contacts.indexOf(contact)
+        if (contacts.contains(contact)) {
+            contacts[indexOf] = contact
+        }
+
+        return indexOf
     }
 }
 
@@ -45,5 +53,6 @@ class ContactViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         tvName.text = contact.name
         tvPhone.text = contact.phone
         if (tvPhone.text.isNotBlank()) tvPhone.show() else tvPhone.hide()
+        if (contact.selected) ivSelected.show() else ivSelected.hide()
     }
 }
