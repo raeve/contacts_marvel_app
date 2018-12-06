@@ -14,5 +14,6 @@ interface ContactsContract {
     interface Presenter : ContactListener {
         fun onCreate()
         fun onPause()
+        fun onSplitBetweenClicked(contacts: MutableList<Contact>)
     }
 }

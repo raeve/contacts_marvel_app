@@ -1,6 +1,7 @@
 package com.rubenexposito.contactsmarvelapp.presentation.contacts.di
 
 import android.app.Activity
+import com.rubenexposito.contactsmarvelapp.Navigator
 import com.rubenexposito.contactsmarvelapp.data.ContactsRepository
 import com.rubenexposito.contactsmarvelapp.data.ContactsRepositoryImpl
 import com.rubenexposito.contactsmarvelapp.data.MarvelRepository
@@ -55,8 +56,9 @@ abstract class ContactsModule {
         @JvmStatic
         internal fun provideContactsPresenter(
             view: ContactsContract.View,
-            useCase: GetContactsUseCase
-        ): ContactsContract.Presenter = ContactsPresenter(view, useCase)
+            useCase: GetContactsUseCase,
+            navigator: Navigator
+        ): ContactsContract.Presenter = ContactsPresenter(view, useCase, navigator)
 
         @Provides
         @PerActivity

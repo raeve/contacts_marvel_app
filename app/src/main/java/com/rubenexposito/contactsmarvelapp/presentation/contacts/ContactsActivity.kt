@@ -14,6 +14,7 @@ import com.rubenexposito.contactsmarvelapp.presentation.contacts.adapter.Selecte
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_contacts.*
 import kotlinx.android.synthetic.main.divider_layout.*
+import kotlinx.android.synthetic.main.layout_button_split.*
 import kotlinx.android.synthetic.main.layout_loading.*
 import javax.inject.Inject
 
@@ -53,6 +54,8 @@ class ContactsActivity : AppCompatActivity(), ContactsContract.View {
             adapter = selectedContactsAdapter
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         }
+
+        btnSplit.setOnClickListener { presenter.onSplitBetweenClicked(selectedContactsAdapter.contacts) }
     }
 
     override fun resetContacts() {
@@ -82,6 +85,9 @@ class ContactsActivity : AppCompatActivity(), ContactsContract.View {
 
         position = contactsAdapter.updateContact(contact)
         contactsAdapter.notifyItemChanged(position)
+
+        btnSplit.text = getString(R.string.button_split_between, selectedContactsAdapter.itemCount)
+        if (selectedContactsAdapter.itemCount > 0) btnSplit.show() else btnSplit.hide()
     }
 
     override fun showLoading() {

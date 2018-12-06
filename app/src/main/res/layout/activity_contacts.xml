@@ -4,7 +4,6 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent"
              android:background="@color/black"
-             android:fitsSystemWindows="true"
              tools:context=".presentation.contacts.ContactsActivity">
 
     <LinearLayout
@@ -23,12 +22,12 @@
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvContacts"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-
-
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:paddingBottom="64dp"/>
     </LinearLayout>
 
+    <include layout="@layout/layout_button_split"/>
+
     <include layout="@layout/layout_loading"/>
-
-
 </FrameLayout>
