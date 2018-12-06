@@ -16,7 +16,7 @@ class MarvelRepositoryImpl(private val marvelApi: MarvelApi, private val contact
     MarvelRepository {
     override fun getCharacters(): Single<List<Contact>> {
         val timestamp = Date().time
-        val concatString = timestamp.toString() + NetworkConfig.MARVEL_PUBLIC_KEY + NetworkConfig.MARVEL_PRIVATE_KEY
+        val concatString = timestamp.toString() + NetworkConfig.MARVEL_PRIVATE_KEY + NetworkConfig.MARVEL_PUBLIC_KEY
         return marvelApi.getCharacters(Date().time, NetworkConfig.MARVEL_PUBLIC_KEY, concatString.md5()).map {
             contactMapper.mapMarvel(it)
         }

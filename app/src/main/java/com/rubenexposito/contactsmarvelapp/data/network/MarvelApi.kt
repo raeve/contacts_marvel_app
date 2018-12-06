@@ -11,6 +11,7 @@ interface MarvelApi {
     fun getCharacters(
         @Query("ts") timestamp: Long,
         @Query("apikey") apiKey: String,
-        @Query("hash") hash: String
+        @Query("hash") hash: String,
+        @Query("limit") limit: Int = 50
     ): Single<GetCharactersResponse>
 }

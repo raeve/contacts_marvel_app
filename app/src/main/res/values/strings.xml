@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">ContactsMarvelApp</string>
     <string name="error_could_not_load_contacts">Could not load contacts</string>
+    <string name="permissions_read_contacts_title">Read contacts permission</string>
+    <string name="permissions_read_contacts_rationale">To display your contacts, allow the application to read your contacts</string>
+    <string name="permissions_read_contacts_denied">To display your contacts, allow the application to read your contacts in the application\'s settings</string>
 </resources>
