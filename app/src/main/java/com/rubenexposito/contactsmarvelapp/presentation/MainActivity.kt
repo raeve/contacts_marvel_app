@@ -1,7 +1,8 @@
-package com.rubenexposito.contactsmarvelapp
+package com.rubenexposito.contactsmarvelapp.presentation
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import com.rubenexposito.contactsmarvelapp.R
 
 class MainActivity : AppCompatActivity() {
 
