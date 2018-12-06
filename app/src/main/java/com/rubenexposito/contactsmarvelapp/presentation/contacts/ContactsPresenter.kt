@@ -4,7 +4,8 @@ import com.rubenexposito.contactsmarvelapp.R
 import com.rubenexposito.contactsmarvelapp.domain.GetContactsUseCase
 import com.rubenexposito.contactsmarvelapp.domain.model.Contact
 
-class ContactsPresenter(private val view: ContactsContract.View, private val useCase: GetContactsUseCase) : ContactsContract.Presenter {
+class ContactsPresenter(private val view: ContactsContract.View, private val useCase: GetContactsUseCase) :
+    ContactsContract.Presenter {
 
     override fun onCreate() {
         view.showLoading()
@@ -13,8 +14,12 @@ class ContactsPresenter(private val view: ContactsContract.View, private val use
 
     override fun onPause() = useCase.clear()
 
+    override fun onContactSelected(contact: Contact) {
+        //TODO: Manage contacts selected.
+    }
+
     internal fun onComplete(contacts: List<Contact>) {
-        view.showContacts(contacts)
+        view.showContacts(contacts.sortedWith(compareBy { it.name }))
         view.hideLoading()
     }
 

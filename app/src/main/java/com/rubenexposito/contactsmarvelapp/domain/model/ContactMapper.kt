@@ -7,7 +7,7 @@ import com.rubenexposito.contactsmarvelapp.data.dto.GetCharactersResponse
 class ContactMapper {
     fun mapMarvel(response: GetCharactersResponse): List<Contact> =
         response.data.results.map {
-            Contact(it.name, it.thumbnail.path)
+            Contact(it.name, it.thumbnail.path + "." + it.thumbnail.extension)
         }
 
     fun mapCursor(cursor: Cursor?): List<Contact> {
@@ -19,7 +19,7 @@ class ContactMapper {
                 do {
                     val contact = Contact(
                         cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME)),
-                        cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.PHOTO_THUMBNAIL_URI))
+                        cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.PHOTO_URI))
                     )
                     contacts.add(contact)
                 } while (cursor.moveToNext())

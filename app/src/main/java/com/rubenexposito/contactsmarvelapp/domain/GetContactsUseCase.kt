@@ -17,7 +17,7 @@ class GetContactsUseCase(
 
     fun execute(onComplete: (List<Contact>) -> Unit, onError: (Throwable) -> Unit) {
         subscription = contactsRepository.getContacts()
-            .mergeWith(marvelRepository.getCharacters())
+            .concatWith(marvelRepository.getCharacters())
             .subscribeOn(subscribeOn)
             .observeOn(observeOn)
             .subscribe(onComplete, onError)

@@ -1,6 +1,6 @@
 package com.rubenexposito.contactsmarvelapp.presentation
 
-import android.support.annotation.StringRes
+import androidx.annotation.StringRes
 
 interface BaseView {
     fun showLoading()

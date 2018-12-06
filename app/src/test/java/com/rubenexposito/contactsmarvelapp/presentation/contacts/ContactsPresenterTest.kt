@@ -28,14 +28,14 @@ class ContactsPresenterTest {
 
     @Test
     fun `should show loading when request contacts`() {
-        presenter.requestContacts()
+        presenter.onCreate()
 
         verify(view).showLoading()
     }
 
     @Test
     fun `should request data when request contacts`() {
-        presenter.requestContacts()
+        presenter.onCreate()
 
         verify(useCase).execute(any(), any())
     }
