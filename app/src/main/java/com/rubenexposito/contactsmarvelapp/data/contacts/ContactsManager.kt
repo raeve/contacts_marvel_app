@@ -9,7 +9,6 @@ import android.support.v4.content.Loader
 import android.support.v7.app.AppCompatActivity
 import com.rubenexposito.contactsmarvelapp.domain.model.Contact
 import com.rubenexposito.contactsmarvelapp.domain.model.ContactMapper
-import java.util.*
 
 class ContactsManager(private val context: AppCompatActivity, private val mapper: ContactMapper) :
     LoaderManager.LoaderCallbacks<Cursor> {

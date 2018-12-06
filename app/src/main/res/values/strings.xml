@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ContactsMarvelApp</string>
+    <string name="error_could_not_load_contacts">Could not load contacts</string>
 </resources>
