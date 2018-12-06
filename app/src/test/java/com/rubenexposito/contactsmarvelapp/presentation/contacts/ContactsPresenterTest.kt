@@ -2,6 +2,7 @@ package com.rubenexposito.contactsmarvelapp.presentation.contacts
 
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.verify
+import com.rubenexposito.contactsmarvelapp.Navigator
 import com.rubenexposito.contactsmarvelapp.domain.GetContactsUseCase
 import com.rubenexposito.contactsmarvelapp.domain.model.Contact
 import org.junit.Before
@@ -15,10 +16,13 @@ class ContactsPresenterTest {
     lateinit var view: ContactsContract.View
 
     @Mock
+    lateinit var navigator: Navigator
+
+    @Mock
     lateinit var useCase: GetContactsUseCase
 
     private val presenter by lazy {
-        ContactsPresenter(view, useCase)
+        ContactsPresenter(view, useCase, navigator)
     }
 
     @Before
@@ -27,15 +31,15 @@ class ContactsPresenterTest {
     }
 
     @Test
-    fun `should show loading when request contacts`() {
-        presenter.onCreate()
+    fun `should show loading after load contacts from phone`() {
+        presenter.onContactsLoadedFromPhone(givenContacts())
 
         verify(view).showLoading()
     }
 
     @Test
-    fun `should request data when request contacts`() {
-        presenter.onCreate()
+    fun `should request data after load contacts from phone`() {
+        presenter.onContactsLoadedFromPhone(givenContacts())
 
         verify(useCase).execute(any(), any())
     }
@@ -52,7 +56,7 @@ class ContactsPresenterTest {
         val contacts = givenContacts()
         presenter.onComplete(contacts)
 
-        verify(view).showContacts(contacts)
+        verify(view).addContacts(contacts)
         verify(view).hideLoading()
     }
 
@@ -64,6 +68,14 @@ class ContactsPresenterTest {
         verify(view).hideLoading()
     }
 
-    private fun givenContacts() : List<Contact> = listOf(Contact("", ""))
+    @Test
+    fun `should navigate to amount view when click split`() {
+        val contacts = givenContacts()
+
+        presenter.onSplitBetweenClicked(contacts)
+        verify(navigator).showAmount(contacts as ArrayList<Contact>)
+    }
+
+    private fun givenContacts(): MutableList<Contact> = listOf(Contact("", "")).toMutableList()
 
 }

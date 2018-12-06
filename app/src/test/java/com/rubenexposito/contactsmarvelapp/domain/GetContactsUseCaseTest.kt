@@ -22,7 +22,7 @@ class GetContactsUseCaseTest {
     fun setUp() {
         MockitoAnnotations.initMocks(this)
 
-        this.getContactsUseCase = GetContactsUseCase(contactsRepository, marvelRepository, Schedulers.trampoline(), Schedulers.trampoline())
+        this.getContactsUseCase = GetContactsUseCase(marvelRepository, Schedulers.trampoline(), Schedulers.trampoline())
     }
 
 
