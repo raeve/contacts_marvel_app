@@ -6,7 +6,7 @@ import com.rubenexposito.contactsmarvelapp.domain.model.Contact
 
 class ContactsPresenter(private val view: ContactsContract.View, private val useCase: GetContactsUseCase) : ContactsContract.Presenter {
 
-    override fun requestContacts(){
+    override fun onCreate() {
         view.showLoading()
         useCase.execute(::onComplete, ::onError)
     }

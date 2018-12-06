@@ -8,6 +8,6 @@ interface ContactsRepository {
     fun getContacts(): Single<List<Contact>>
 }
 
-class ContactRepositoryImpl(private val contactsManager: ContactsManager) : ContactsRepository {
+class ContactsRepositoryImpl(private val contactsManager: ContactsManager) : ContactsRepository {
     override fun getContacts(): Single<List<Contact>> = Single.just(contactsManager.contacts)
 }

@@ -9,7 +9,7 @@ interface ContactsContract {
     }
 
     interface Presenter {
+        fun onCreate()
         fun onPause()
-        fun requestContacts()
     }
 }
