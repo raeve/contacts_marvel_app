@@ -5,12 +5,12 @@ import android.provider.ContactsContract
 import com.rubenexposito.contactsmarvelapp.data.dto.GetCharactersResponse
 
 class ContactMapper {
-    fun mapMarvel(response: GetCharactersResponse): List<Contact> =
+    fun mapMarvel(response: GetCharactersResponse): MutableList<Contact> =
         response.data.results.map {
             Contact(it.name, it.thumbnail.path + "." + it.thumbnail.extension)
-        }
+        }.toMutableList()
 
-    fun mapCursor(cursor: Cursor?): List<Contact> {
+    fun mapCursor(cursor: Cursor?): MutableList<Contact> {
         val contacts: MutableList<Contact> = ArrayList()
 
         if (cursor != null) {

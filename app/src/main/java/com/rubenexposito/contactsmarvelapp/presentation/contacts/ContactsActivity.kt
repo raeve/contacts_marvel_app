@@ -41,15 +41,20 @@ class ContactsActivity : AppCompatActivity(), ContactsContract.View {
 
     private fun initView() {
         with(rvContacts) {
-            layoutManager = LinearLayoutManager(context)
             adapter = contactsAdapter
-            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(context)
         }
     }
 
-    override fun showContacts(contacts: List<Contact>) {
+    override fun resetContacts() {
+        rvContacts.hide()
+        contactsAdapter.contacts = ArrayList()
+        contactsAdapter.notifyDataSetChanged()
+    }
+
+    override fun addContacts(contacts: MutableList<Contact>) {
         rvContacts.show()
-        contactsAdapter.contacts = contacts
+        contactsAdapter.addContacts(contacts)
         contactsAdapter.notifyDataSetChanged()
     }
 
@@ -62,7 +67,7 @@ class ContactsActivity : AppCompatActivity(), ContactsContract.View {
     }
 
     override fun showError(@StringRes stringRes: Int) {
-        rvContacts.hide()
+        if (contactsAdapter.itemCount == 0) rvContacts.hide()
         Toast.makeText(this, stringRes, Toast.LENGTH_SHORT).show()
     }
 }

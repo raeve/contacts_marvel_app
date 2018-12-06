@@ -24,7 +24,7 @@ import org.jetbrains.anko.yesButton
 
 class ContactsManager(private val activity: AppCompatActivity, private val mapper: ContactMapper) :
     LoaderManager.LoaderCallbacks<Cursor> {
-    var contacts: List<Contact> = ArrayList()
+    var contacts: MutableList<Contact> = ArrayList()
 
     init {
         Dexter.withActivity(activity)

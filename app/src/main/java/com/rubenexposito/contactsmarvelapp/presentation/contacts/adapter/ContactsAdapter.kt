@@ -11,7 +11,7 @@ import com.rubenexposito.contactsmarvelapp.common.show
 import com.rubenexposito.contactsmarvelapp.domain.model.Contact
 import kotlinx.android.synthetic.main.item_contact.view.*
 
-class ContactsAdapter(private val callback: ContactListener, var contacts: List<Contact> = ArrayList()) :
+class ContactsAdapter(private val callback: ContactListener, var contacts: MutableList<Contact> = ArrayList()) :
     RecyclerView.Adapter<ContactViewHolder>() {
     init {
         setHasStableIds(true)
@@ -28,6 +28,11 @@ class ContactsAdapter(private val callback: ContactListener, var contacts: List<
         bind(contact)
         itemView.setOnClickListener { callback.onContactSelected(contact) }
     }
+
+    fun addContacts(contacts: MutableList<Contact>) {
+        this.contacts.addAll(contacts)
+        this.contacts = this.contacts.sortedWith(compareBy { it.name }).toMutableList()
+    }
 }
 
 interface ContactListener {
@@ -36,7 +41,7 @@ interface ContactListener {
 
 class ContactViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun bind(contact: Contact) = with(itemView) {
-        ivAvatar.load(contact.avatar)
+        ivAvatar.load(contact.avatar, contact.name)
         tvName.text = contact.name
         tvPhone.text = contact.phone
         if (tvPhone.text.isNotBlank()) tvPhone.show() else tvPhone.hide()

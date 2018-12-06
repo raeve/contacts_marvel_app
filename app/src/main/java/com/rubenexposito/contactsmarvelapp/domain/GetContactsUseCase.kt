@@ -15,9 +15,9 @@ class GetContactsUseCase(
 
     private var subscription = Disposables.empty()
 
-    fun execute(onComplete: (List<Contact>) -> Unit, onError: (Throwable) -> Unit) {
+    fun execute(onComplete: (MutableList<Contact>) -> Unit, onError: (Throwable) -> Unit) {
         subscription = contactsRepository.getContacts()
-            .concatWith(marvelRepository.getCharacters())
+            .mergeWith(marvelRepository.getCharacters())
             .subscribeOn(subscribeOn)
             .observeOn(observeOn)
             .subscribe(onComplete, onError)

@@ -3,12 +3,14 @@ package com.rubenexposito.contactsmarvelapp.presentation.contacts
 import com.rubenexposito.contactsmarvelapp.R
 import com.rubenexposito.contactsmarvelapp.domain.GetContactsUseCase
 import com.rubenexposito.contactsmarvelapp.domain.model.Contact
+import retrofit2.HttpException
 
 class ContactsPresenter(private val view: ContactsContract.View, private val useCase: GetContactsUseCase) :
     ContactsContract.Presenter {
 
     override fun onCreate() {
         view.showLoading()
+        view.resetContacts()
         useCase.execute(::onComplete, ::onError)
     }
 
@@ -18,13 +20,17 @@ class ContactsPresenter(private val view: ContactsContract.View, private val use
         //TODO: Manage contacts selected.
     }
 
-    internal fun onComplete(contacts: List<Contact>) {
-        view.showContacts(contacts.sortedWith(compareBy { it.name }))
+    internal fun onComplete(contacts: MutableList<Contact>) {
+        view.addContacts(contacts)
         view.hideLoading()
     }
 
     internal fun onError(throwable: Throwable) {
-        view.showError(R.string.error_could_not_load_contacts)
+        if(throwable is HttpException) {
+            view.showError(R.string.error_could_not_retrieve_marvel_characters)
+        }else{
+            view.showError(R.string.error_could_not_load_contacts)
+        }
         view.hideLoading()
     }
 }

@@ -6,7 +6,8 @@ import com.rubenexposito.contactsmarvelapp.presentation.contacts.adapter.Contact
 
 interface ContactsContract {
     interface View : BaseView {
-        fun showContacts(contacts: List<Contact>)
+        fun addContacts(contacts: MutableList<Contact>)
+        fun resetContacts()
     }
 
     interface Presenter : ContactListener {
