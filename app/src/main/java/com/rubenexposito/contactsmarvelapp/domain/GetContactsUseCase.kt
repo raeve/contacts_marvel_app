@@ -1,4 +1,7 @@
 package com.rubenexposito.contactsmarvelapp.domain
 
-class GetContactsUseCase {
+import com.rubenexposito.contactsmarvelapp.data.MarvelRepository
+
+class GetContactsUseCase(private val marvelRepository: MarvelRepository) {
+
 }
