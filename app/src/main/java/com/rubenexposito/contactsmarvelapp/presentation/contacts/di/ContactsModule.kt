@@ -2,10 +2,10 @@ package com.rubenexposito.contactsmarvelapp.presentation.contacts.di
 
 import android.app.Activity
 import com.rubenexposito.contactsmarvelapp.Navigator
+import com.rubenexposito.contactsmarvelapp.data.ContactsLoaderListener
 import com.rubenexposito.contactsmarvelapp.data.ContactsRepository
 import com.rubenexposito.contactsmarvelapp.data.ContactsRepositoryImpl
 import com.rubenexposito.contactsmarvelapp.data.MarvelRepository
-import com.rubenexposito.contactsmarvelapp.data.contacts.ContactsManager
 import com.rubenexposito.contactsmarvelapp.di.PerActivity
 import com.rubenexposito.contactsmarvelapp.domain.GetContactsUseCase
 import com.rubenexposito.contactsmarvelapp.domain.model.ContactMapper
@@ -38,18 +38,20 @@ abstract class ContactsModule {
         @Provides
         @PerActivity
         @JvmStatic
-        fun provideContactsRepository(activity: ContactsActivity): ContactsRepository =
-            ContactsRepositoryImpl(ContactsManager(activity, ContactMapper()))
+        fun provideContactsRepository(
+            activity: ContactsActivity,
+            listener: ContactsLoaderListener
+        ): ContactsRepository =
+            ContactsRepositoryImpl(activity, ContactMapper(), listener)
 
         @Provides
         @PerActivity
         @JvmStatic
         internal fun provideGetContactsUseCase(
-            contactsRepository: ContactsRepository,
             marvelRepository: MarvelRepository,
             @Named("observeOn") observeOn: Scheduler,
             @Named("subscribeOn") subscribeOn: Scheduler
-        ): GetContactsUseCase = GetContactsUseCase(contactsRepository, marvelRepository, observeOn, subscribeOn)
+        ): GetContactsUseCase = GetContactsUseCase(marvelRepository, observeOn, subscribeOn)
 
         @Provides
         @PerActivity
@@ -59,6 +61,11 @@ abstract class ContactsModule {
             useCase: GetContactsUseCase,
             navigator: Navigator
         ): ContactsContract.Presenter = ContactsPresenter(view, useCase, navigator)
+
+        @Provides
+        @PerActivity
+        @JvmStatic
+        fun provideContactsLoaderListener(presenter: ContactsContract.Presenter): ContactsLoaderListener = presenter
 
         @Provides
         @PerActivity

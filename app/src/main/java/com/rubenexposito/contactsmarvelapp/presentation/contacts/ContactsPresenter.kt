@@ -6,11 +6,22 @@ import com.rubenexposito.contactsmarvelapp.domain.GetContactsUseCase
 import com.rubenexposito.contactsmarvelapp.domain.model.Contact
 import retrofit2.HttpException
 
-class ContactsPresenter(private val view: ContactsContract.View, private val useCase: GetContactsUseCase, private val navigator: Navigator) :
-    ContactsContract.Presenter {
+class ContactsPresenter(
+    private val view: ContactsContract.View,
+    private val useCase: GetContactsUseCase,
+    private val navigator: Navigator
+) : ContactsContract.Presenter {
 
+    var contacts: MutableList<Contact> = ArrayList()
 
     override fun onCreate() {
+        view.showLoading()
+        view.resetContacts()
+    }
+
+    override fun onContactsLoadedFromPhone(contacts: MutableList<Contact>) {
+        this.contacts = contacts
+
         view.showLoading()
         view.resetContacts()
         useCase.execute(::onComplete, ::onError)
@@ -27,7 +38,8 @@ class ContactsPresenter(private val view: ContactsContract.View, private val use
         view.addOrRemoveContact(contact)
     }
 
-    internal fun onComplete(contacts: MutableList<Contact>) {
+    internal fun onComplete(marvelContacts: MutableList<Contact>) {
+        contacts.addAll(marvelContacts)
         view.addContacts(contacts)
         view.hideLoading()
     }
