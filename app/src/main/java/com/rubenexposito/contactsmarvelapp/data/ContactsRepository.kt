@@ -81,7 +81,7 @@ class ContactsRepositoryImpl(
 
         val projection = arrayOf(
             ContactsContract.Contacts._ID,
-            ContactsContract.Contacts.DISPLAY_NAME,
+            ContactsContract.Contacts.DISPLAY_NAME_PRIMARY,
             ContactsContract.Contacts.PHOTO_URI,
             ContactsContract.Contacts.HAS_PHONE_NUMBER
         )
@@ -91,7 +91,7 @@ class ContactsRepositoryImpl(
             projection,
             null,
             null,
-            null
+            ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME_PRIMARY + " ASC"
         )
 
         if (cursor != null) {
@@ -100,7 +100,7 @@ class ContactsRepositoryImpl(
                 do {
                     val id = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID))
                     val name =
-                        cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME))
+                        cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME_PRIMARY))
                     val photo =
                         cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.PHOTO_URI))
                     var phoneNumber: String? = null
@@ -131,8 +131,6 @@ class ContactsRepositoryImpl(
                             phoneNumber
                         )
                     )
-
-
                 } while (cursor.moveToNext())
             }
             cursor.close()

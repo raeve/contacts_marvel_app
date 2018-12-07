@@ -23,7 +23,7 @@ class ContactsAdapter(
         ContactViewHolder(parent.inflate(R.layout.item_contact))
 
     override fun getItemCount(): Int = contacts.size
-    override fun getItemId(position: Int): Long = contacts[position].name.hashCode().toLong()
+    override fun getItemId(position: Int): Long = contacts[position].hashCode().toLong()
     override fun onBindViewHolder(holder: ContactViewHolder, position: Int) = with(holder) {
         val contact = contacts[position]
         bind(contact, selectedContacts)
@@ -37,6 +37,11 @@ class ContactsAdapter(
         }
 
         return indexOf
+    }
+
+    fun addContacts(contacts: MutableList<Contact>) {
+        this.contacts.addAll(contacts)
+        this.contacts.sortBy { it.name }
     }
 }
 

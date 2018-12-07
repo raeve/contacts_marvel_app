@@ -19,7 +19,7 @@ class SelectedContactsAdapter(private val callback: ContactListener, var contact
         SelectedContactViewHolder(parent.inflate(R.layout.item_contact_selected))
 
     override fun getItemCount(): Int = contacts.size
-    override fun getItemId(position: Int): Long = contacts[position].name.hashCode().toLong()
+    override fun getItemId(position: Int): Long = contacts[position].hashCode().toLong()
     override fun onBindViewHolder(holder: SelectedContactViewHolder, position: Int) = with(holder) {
         val contact = contacts[position]
         bind(contact)

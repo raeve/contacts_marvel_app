@@ -18,9 +18,10 @@ class GetContactsUseCase(
 
     fun execute(
         onComplete: (MutableList<Contact>) -> Unit,
-        onError: (Throwable) -> Unit
+        onError: (Throwable) -> Unit,
+        offset: Int = 0, limit: Int = 50
     ) {
-        subscription = marvelRepository.getCharacters()
+        subscription = marvelRepository.getCharacters(limit, offset)
             .map(fun(it: MutableList<Contact>): MutableList<Contact> {
                 it.addAll(contactsRepository.getPhoneContacts())
                 return it.sortedBy { it.name }.toMutableList()

@@ -12,6 +12,7 @@ interface MarvelApi {
         @Query("ts") timestamp: Long,
         @Query("apikey") apiKey: String,
         @Query("hash") hash: String,
-        @Query("limit") limit: Int = 50
+        @Query("limit") limit: Int = 50,
+        @Query("offset") offset: Int = 0
     ): Single<GetCharactersResponse>
 }

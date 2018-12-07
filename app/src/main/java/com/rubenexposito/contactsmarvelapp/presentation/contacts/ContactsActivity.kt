@@ -5,6 +5,7 @@ import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.rubenexposito.contactsmarvelapp.R
 import com.rubenexposito.contactsmarvelapp.common.hide
 import com.rubenexposito.contactsmarvelapp.common.show
@@ -33,7 +34,7 @@ class ContactsActivity : AppCompatActivity(), ContactsContract.View {
         setContentView(R.layout.activity_contacts)
         AndroidInjection.inject(this)
         initView()
-        presenter.onCreate()
+        presenter.loadContacts(true)
     }
 
     override fun onPause() {
@@ -42,11 +43,22 @@ class ContactsActivity : AppCompatActivity(), ContactsContract.View {
     }
 
     private fun initView() {
-        srlContacts.setOnRefreshListener { presenter.onCreate() }
+        srlContacts.setOnRefreshListener { presenter.loadContacts(true) }
 
         with(rvContacts) {
             adapter = contactsAdapter
-            layoutManager = LinearLayoutManager(context)
+            val linearLayoutManager = LinearLayoutManager(this@ContactsActivity)
+            layoutManager = linearLayoutManager
+            //TODO: Review pagination
+//            addOnScrollListener(object: RecyclerView.OnScrollListener() {
+//                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+//                    if(linearLayoutManager.findLastCompletelyVisibleItemPosition() == linearLayoutManager.itemCount - 1){
+//                        presenter.loadContacts(false)
+//                    }
+//                    super.onScrollStateChanged(recyclerView, newState)
+//                }
+//            })
+            setHasFixedSize(true)
         }
         with(rvSelectedContacts) {
             adapter = selectedContactsAdapter
@@ -56,17 +68,23 @@ class ContactsActivity : AppCompatActivity(), ContactsContract.View {
         btnSplit.setOnClickListener { presenter.onSplitBetweenClicked(selectedContactsAdapter.contacts) }
     }
 
-    override fun resetContacts() {
-        rvContacts.hide()
-        contactsAdapter.contacts = ArrayList()
-        contactsAdapter.notifyDataSetChanged()
-    }
-
     override fun addContacts(contacts: MutableList<Contact>) {
         rvContacts.show()
-        contactsAdapter.selectedContacts = selectedContactsAdapter.contacts
-        contactsAdapter.contacts = contacts
-        contactsAdapter.notifyDataSetChanged()
+        with(rvContacts.adapter as ContactsAdapter) {
+            selectedContacts = selectedContactsAdapter.contacts
+            val position = this.contacts.size
+            this.addContacts(contacts)
+            notifyDataSetChanged()
+        }
+    }
+
+    override fun showContacts(contacts: MutableList<Contact>) {
+        rvContacts.show()
+        with(rvContacts.adapter as ContactsAdapter) {
+            selectedContacts = selectedContactsAdapter.contacts
+            this.contacts = contacts
+            notifyDataSetChanged()
+        }
     }
 
     override fun addOrRemoveContact(contact: Contact) {

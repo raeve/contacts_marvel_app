@@ -7,12 +7,12 @@ import com.rubenexposito.contactsmarvelapp.presentation.contacts.adapter.Contact
 interface ContactsContract {
     interface View : BaseView {
         fun addContacts(contacts: MutableList<Contact>)
-        fun resetContacts()
+        fun showContacts(contacts: MutableList<Contact>)
         fun addOrRemoveContact(contact: Contact)
     }
 
     interface Presenter : ContactListener {
-        fun onCreate()
+        fun loadContacts(reset: Boolean)
         fun onPause()
         fun onSplitBetweenClicked(contacts: MutableList<Contact>)
     }

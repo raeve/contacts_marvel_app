@@ -11,11 +11,7 @@ class ContactsPresenter(
     private val useCase: GetContactsUseCase,
     private val navigator: Navigator
 ) : ContactsContract.Presenter {
-
-    override fun onCreate() {
-        view.showLoading()
-        useCase.execute(::onComplete, ::onError)
-    }
+    var offset = 0
 
     override fun onPause() = useCase.clear()
 
@@ -28,8 +24,14 @@ class ContactsPresenter(
         view.addOrRemoveContact(contact)
     }
 
+    override fun loadContacts(reset: Boolean) {
+        view.showLoading()
+        if (reset) offset = 0
+        useCase.execute(::onComplete, ::onError, offset, LIMIT)
+    }
+
     internal fun onComplete(contacts: MutableList<Contact>) {
-        view.addContacts(contacts)
+        view.showContacts(contacts)
         view.hideLoading()
     }
 
@@ -40,5 +42,9 @@ class ContactsPresenter(
             view.showError(R.string.error_could_not_load_contacts)
         }
         view.hideLoading()
+    }
+
+    companion object {
+        const val LIMIT = 50
     }
 }

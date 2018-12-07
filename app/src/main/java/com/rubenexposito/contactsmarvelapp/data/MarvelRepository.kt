@@ -9,15 +9,15 @@ import io.reactivex.Single
 import java.util.*
 
 interface MarvelRepository {
-    fun getCharacters(): Single<MutableList<Contact>>
+    fun getCharacters(limit: Int, offset: Int): Single<MutableList<Contact>>
 }
 
 class MarvelRepositoryImpl(private val marvelApi: MarvelApi, private val contactMapper: ContactMapper) :
     MarvelRepository {
-    override fun getCharacters(): Single<MutableList<Contact>> {
+    override fun getCharacters(limit: Int, offset: Int): Single<MutableList<Contact>> {
         val timestamp = Date().time
         val concatString = timestamp.toString() + NetworkConfig.MARVEL_PRIVATE_KEY + NetworkConfig.MARVEL_PUBLIC_KEY
-        return marvelApi.getCharacters(Date().time, NetworkConfig.MARVEL_PUBLIC_KEY, concatString.md5()).map {
+        return marvelApi.getCharacters(Date().time, NetworkConfig.MARVEL_PUBLIC_KEY, concatString.md5(), limit, offset).map {
             contactMapper.mapMarvel(it)
         }
     }
