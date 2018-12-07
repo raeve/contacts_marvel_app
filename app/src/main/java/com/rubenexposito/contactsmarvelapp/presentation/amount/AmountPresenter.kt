@@ -58,10 +58,8 @@ class AmountPresenter(private val view: AmountContract.View, private val navigat
                 total += "0.${decimals.toDecimals()}".toDouble()
             }
 
-            for(contact in contacts) {
-                contact.selected = false
-                contact.split = total/contacts.size
-            }
+            for(contact in contacts) contact.split = total/contacts.size
+
 
             navigator.showSplit(contacts as ArrayList<Contact>, total)
         }

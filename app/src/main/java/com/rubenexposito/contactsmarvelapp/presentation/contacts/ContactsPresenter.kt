@@ -28,8 +28,7 @@ class ContactsPresenter(
         view.addOrRemoveContact(contact)
     }
 
-    internal fun onComplete(marvelContacts: MutableList<Contact>) {
-        val contacts = marvelContacts.sortedWith(compareBy { it.name }).toMutableList()
+    internal fun onComplete(contacts: MutableList<Contact>) {
         view.addContacts(contacts)
         view.hideLoading()
     }

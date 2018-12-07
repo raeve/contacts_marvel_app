@@ -20,9 +20,17 @@
 
         <include layout="@layout/divider_layout" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvContacts"
-            style="@style/RecyclerPadding" />
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/srlContacts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvContacts"
+                style="@style/RecyclerPadding" />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
     </LinearLayout>
 
     <include layout="@layout/layout_button_split" />

@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.rubenexposito.contactsmarvelapp.R
 import com.rubenexposito.contactsmarvelapp.common.hide
 import com.rubenexposito.contactsmarvelapp.common.show
-import com.rubenexposito.contactsmarvelapp.data.ContactsRepository
 import com.rubenexposito.contactsmarvelapp.domain.model.Contact
 import com.rubenexposito.contactsmarvelapp.presentation.contacts.adapter.ContactsAdapter
 import com.rubenexposito.contactsmarvelapp.presentation.contacts.adapter.SelectedContactsAdapter
@@ -20,9 +19,6 @@ import kotlinx.android.synthetic.main.layout_loading.*
 import javax.inject.Inject
 
 class ContactsActivity : AppCompatActivity(), ContactsContract.View {
-    @Inject
-    lateinit var contactsRepository: ContactsRepository
-
     @Inject
     lateinit var presenter: ContactsContract.Presenter
 
@@ -37,10 +33,6 @@ class ContactsActivity : AppCompatActivity(), ContactsContract.View {
         setContentView(R.layout.activity_contacts)
         AndroidInjection.inject(this)
         initView()
-    }
-
-    override fun onResume() {
-        super.onResume()
         presenter.onCreate()
     }
 
@@ -50,6 +42,8 @@ class ContactsActivity : AppCompatActivity(), ContactsContract.View {
     }
 
     private fun initView() {
+        srlContacts.setOnRefreshListener { presenter.onCreate() }
+
         with(rvContacts) {
             adapter = contactsAdapter
             layoutManager = LinearLayoutManager(context)
@@ -95,10 +89,12 @@ class ContactsActivity : AppCompatActivity(), ContactsContract.View {
     }
 
     override fun showLoading() {
+        srlContacts.isRefreshing = false
         progressView.show()
     }
 
     override fun hideLoading() {
+        srlContacts.isRefreshing = false
         progressView.hide()
     }
 
