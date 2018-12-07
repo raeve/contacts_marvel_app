@@ -33,6 +33,11 @@ class SplitActivity : AppCompatActivity(), SplitContract.View {
         initView()
     }
 
+    override fun onResume() {
+        super.onResume()
+        setTitle(R.string.split_title)
+    }
+
     override fun updateAmount(amount: Double) {
         tvName.text = amount.toPrice()
     }

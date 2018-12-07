@@ -30,6 +30,11 @@ class AmountActivity : AppCompatActivity(), AmountContract.View, View.OnClickLis
         initView()
     }
 
+    override fun onResume() {
+        super.onResume()
+        setTitle(R.string.amount_title)
+    }
+
     private fun initExtras() {
         intent?.let {
             presenter.updateContacts(intent.getParcelableArrayListExtra(INTENT_KEY_CONTACTS))

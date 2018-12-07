@@ -37,6 +37,11 @@ class ContactsActivity : AppCompatActivity(), ContactsContract.View {
         presenter.loadContacts(true)
     }
 
+    override fun onResume() {
+        super.onResume()
+        setTitle(R.string.contacts_title)
+    }
+
     override fun onPause() {
         presenter.onPause()
         super.onPause()
