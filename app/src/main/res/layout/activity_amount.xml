@@ -1,7 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:orientation="vertical">
 
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp">
+
+            <TextView
+                android:id="@+id/tvAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="0"
+                android:textColor="@color/white"
+                android:textSize="72sp"
+                android:textStyle="bold"
+                tools:text="0" />
+
+            <TextView
+                style="@style/TextAmountSecondary"
+                android:layout_alignBaseline="@id/tvAmount"
+                android:layout_toStartOf="@id/tvAmount"
+                android:text="@string/currency_eur" />
+
+            <TextView
+                android:id="@+id/tvDecimals"
+                style="@style/TextAmountSecondary"
+                android:layout_alignBaseline="@id/tvAmount"
+                android:layout_toEndOf="@id/tvAmount"
+                android:visibility="gone"
+                tools:text="49"
+                tools:visibility="visible" />
+
+        </RelativeLayout>
+
+        <include layout="@layout/layout_panel_numbers" />
+
+    </LinearLayout>
+
+    <include layout="@layout/layout_button_split" />
+
+</FrameLayout>

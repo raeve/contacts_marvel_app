@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout style="@style/LinearPanelRow">
+
+        <TextView
+            android:id="@+id/tvPanelOne"
+            style="@style/TextPanel"
+            android:text="1" />
+
+        <TextView
+            android:id="@+id/tvPanelTwo"
+            style="@style/TextPanel"
+            android:text="2" />
+
+        <TextView
+            android:id="@+id/tvPanelThree"
+            style="@style/TextPanel"
+            android:text="3" />
+
+    </LinearLayout>
+
+    <LinearLayout style="@style/LinearPanelRow">
+
+        <TextView
+            android:id="@+id/tvPanelFour"
+            style="@style/TextPanel"
+            android:text="4" />
+
+        <TextView
+            android:id="@+id/tvPanelFive"
+            style="@style/TextPanel"
+            android:text="5" />
+
+        <TextView
+            android:id="@+id/tvPanelSix"
+            style="@style/TextPanel"
+            android:text="6" />
+
+    </LinearLayout>
+
+    <LinearLayout style="@style/LinearPanelRow">
+
+        <TextView
+            android:id="@+id/tvPanelSeven"
+            style="@style/TextPanel"
+            android:text="7" />
+
+        <TextView
+            android:id="@+id/tvPanelEight"
+            style="@style/TextPanel"
+            android:text="8" />
+
+        <TextView
+            android:id="@+id/tvPanelNine"
+            style="@style/TextPanel"
+            android:text="9" />
+
+    </LinearLayout>
+
+    <LinearLayout style="@style/LinearPanelRow">
+
+        <TextView
+            android:id="@+id/tvPanelDot"
+            style="@style/TextPanel"
+            android:text="." />
+
+        <TextView
+            android:id="@+id/tvPanelZero"
+            style="@style/TextPanel"
+            android:text="0" />
+
+        <ImageView
+            android:id="@+id/tvPanelRemove"
+            style="@style/TextPanel"
+            android:src="@drawable/ic_backspace_24dp"
+            android:scaleType="center"/>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -6,4 +6,5 @@
     <string name="permissions_read_contacts_denied">To display your contacts, allow the application to read your contacts in the application\'s settings</string>
     <string name="error_could_not_retrieve_marvel_characters">Could not retieve Marvel characters</string>
     <string name="button_split_between">Split between %1$d</string>
+    <string name="currency_eur">€</string>
 </resources>
