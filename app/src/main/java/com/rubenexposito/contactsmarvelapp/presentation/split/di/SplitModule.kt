@@ -33,8 +33,7 @@ abstract class SplitModule {
         @PerActivity
         @JvmStatic
         internal fun provideAmountPresenter(
-            view: SplitContract.View,
-            navigator: Navigator
-        ): SplitContract.Presenter = SplitPresenter(view, navigator)
+            view: SplitContract.View
+        ): SplitContract.Presenter = SplitPresenter(view)
     }
 }

@@ -8,11 +8,11 @@ import com.rubenexposito.contactsmarvelapp.domain.model.Contact
 class AmountPresenter(private val view: AmountContract.View, private val navigator: Navigator) :
         AmountContract.Presenter {
 
-    private lateinit var contacts: List<Contact>
+    internal lateinit var contacts: List<Contact>
 
-    private var isDecimalActivated = false
-    private var amount = ZERO
-    private var decimals = ""
+    internal var isDecimalActivated = false
+    internal var amount = ZERO
+    internal var decimals = ""
 
     override fun updateContacts(contacts: List<Contact>) {
         this.contacts = contacts

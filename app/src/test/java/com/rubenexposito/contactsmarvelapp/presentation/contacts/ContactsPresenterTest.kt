@@ -32,22 +32,19 @@ class ContactsPresenterTest {
 
     @Test
     fun `should show loading after load contacts from phone`() {
-        presenter.onContactsLoadedFromPhone(givenContacts())
-
+        presenter.loadContacts(false)
         verify(view).showLoading()
     }
 
     @Test
     fun `should request data after load contacts from phone`() {
-        presenter.onContactsLoadedFromPhone(givenContacts())
-
-        verify(useCase).execute(any(), any())
+        presenter.loadContacts(false)
+        verify(useCase).execute(any(), any(), any(), any())
     }
 
     @Test
     fun `should clear use case when on pause`() {
         presenter.onPause()
-
         verify(useCase).clear()
     }
 
@@ -56,7 +53,7 @@ class ContactsPresenterTest {
         val contacts = givenContacts()
         presenter.onComplete(contacts)
 
-        verify(view).addContacts(contacts)
+        verify(view).showContacts(contacts)
         verify(view).hideLoading()
     }
 
