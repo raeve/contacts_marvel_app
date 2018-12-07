@@ -125,6 +125,7 @@ class ContactsRepositoryImpl(
 
                     if (!phoneNumber.isNullOrBlank()) contacts.add(
                         Contact(
+                            "phone:$id",
                             name,
                             photo,
                             phoneNumber

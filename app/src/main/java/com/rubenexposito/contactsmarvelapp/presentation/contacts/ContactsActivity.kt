@@ -64,25 +64,29 @@ class ContactsActivity : AppCompatActivity(), ContactsContract.View {
 
     override fun addContacts(contacts: MutableList<Contact>) {
         rvContacts.show()
+        contactsAdapter.selectedContacts = selectedContactsAdapter.contacts
         contactsAdapter.contacts = contacts
         contactsAdapter.notifyDataSetChanged()
     }
 
     override fun addOrRemoveContact(contact: Contact) {
-        var position = selectedContactsAdapter.addOrRemoveContact(contact)
-        if (position == -1) selectedContactsAdapter.notifyItemInserted(0)
-        else selectedContactsAdapter.notifyItemRemoved(position)
+        with(selectedContactsAdapter){
+            val position = addOrRemoveContact(contact)
+            if(position == -1) notifyItemInserted(0) else notifyItemRemoved(position)
 
-        if (selectedContactsAdapter.itemCount > 0) {
-            rvSelectedContacts.show()
-            divider.show()
-        } else {
-            rvSelectedContacts.hide()
-            divider.hide()
+            if(itemCount > 0) {
+                rvSelectedContacts.show()
+                divider.show()
+            } else {
+                rvSelectedContacts.hide()
+                divider.hide()
+            }
         }
 
-        position = contactsAdapter.updateContact(contact)
-        contactsAdapter.notifyItemChanged(position)
+        with(contactsAdapter){
+            selectedContacts = selectedContactsAdapter.contacts
+            notifyItemChanged(updateContact(contact))
+        }
 
         btnSplit.text = getString(R.string.button_split_between, selectedContactsAdapter.itemCount)
         if (selectedContactsAdapter.itemCount > 0) btnSplit.show() else btnSplit.hide()

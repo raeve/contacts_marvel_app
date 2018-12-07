@@ -9,10 +9,12 @@ import com.rubenexposito.contactsmarvelapp.domain.model.Contact
 import kotlinx.android.synthetic.main.item_contact.view.*
 
 class ContactsAdapter(
-    private val callback: ContactListener? = null,
-    var contacts: MutableList<Contact> = ArrayList()
+    private val callback: ContactListener? = null
 ) :
     RecyclerView.Adapter<ContactViewHolder>() {
+    var contacts: MutableList<Contact> = ArrayList()
+    var selectedContacts: List<Contact> = ArrayList()
+
     init {
         setHasStableIds(true)
     }
@@ -24,7 +26,7 @@ class ContactsAdapter(
     override fun getItemId(position: Int): Long = contacts[position].name.hashCode().toLong()
     override fun onBindViewHolder(holder: ContactViewHolder, position: Int) = with(holder) {
         val contact = contacts[position]
-        bind(contact)
+        bind(contact, selectedContacts)
         itemView.setOnClickListener { callback?.onContactSelected(contact) }
     }
 
@@ -43,13 +45,13 @@ interface ContactListener {
 }
 
 class ContactViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    fun bind(contact: Contact) = with(itemView) {
+    fun bind(contact: Contact, selectedContacts: List<Contact>) = with(itemView) {
         ivAvatar.load(contact.avatar, contact.name)
         tvName.text = contact.name
         tvPhone.text = contact.phone
         tvSplit.text = contact.split.toPrice()
         if (tvPhone.text.isNotBlank()) tvPhone.show() else tvPhone.hide()
         if (contact.split != 0.0) tvSplit.show() else tvSplit.hide()
-        if (contact.selected && contact.split == 0.0) ivSelected.show() else ivSelected.hide()
+        if (selectedContacts.contains(contact)) ivSelected.show() else ivSelected.hide()
     }
 }

@@ -3,12 +3,9 @@ package com.rubenexposito.contactsmarvelapp.domain
 import com.rubenexposito.contactsmarvelapp.data.ContactsRepository
 import com.rubenexposito.contactsmarvelapp.data.MarvelRepository
 import com.rubenexposito.contactsmarvelapp.domain.model.Contact
-import io.reactivex.ObservableEmitter
-import io.reactivex.ObservableOnSubscribe
 import io.reactivex.Scheduler
 import io.reactivex.disposables.Disposable
 import io.reactivex.disposables.Disposables
-import rx.Observable
 
 class GetContactsUseCase(
     private val marvelRepository: MarvelRepository,

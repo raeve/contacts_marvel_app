@@ -5,6 +5,6 @@ import com.rubenexposito.contactsmarvelapp.data.dto.GetCharactersResponse
 class ContactMapper {
     fun mapMarvel(response: GetCharactersResponse): MutableList<Contact> =
         response.data.results.map {
-            Contact(it.name, it.thumbnail.path + "." + it.thumbnail.extension)
+            Contact("marvel:${it.id}", it.name, it.thumbnail.path + "." + it.thumbnail.extension)
         }.toMutableList()
 }
