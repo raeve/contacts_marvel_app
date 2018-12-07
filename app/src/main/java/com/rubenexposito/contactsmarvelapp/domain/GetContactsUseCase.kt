@@ -1,12 +1,15 @@
 package com.rubenexposito.contactsmarvelapp.domain
 
+import com.rubenexposito.contactsmarvelapp.data.ContactsRepository
 import com.rubenexposito.contactsmarvelapp.data.MarvelRepository
 import com.rubenexposito.contactsmarvelapp.domain.model.Contact
 import io.reactivex.Scheduler
+import io.reactivex.Single
 import io.reactivex.disposables.Disposables
 
 class GetContactsUseCase(
     private val marvelRepository: MarvelRepository,
+    private val contactsRepository: ContactsRepository,
     private val observeOn: Scheduler,
     private val subscribeOn: Scheduler
 ) {
@@ -17,10 +20,11 @@ class GetContactsUseCase(
         onComplete: (MutableList<Contact>) -> Unit,
         onError: (Throwable) -> Unit
     ) {
-        subscription = marvelRepository.getCharacters()
-            .subscribeOn(subscribeOn)
-            .observeOn(observeOn)
-            .subscribe(onComplete, onError)
+        subscription =
+                Single.concat(marvelRepository.getCharacters(), contactsRepository.getPhoneContacts())
+                    .subscribeOn(subscribeOn)
+                    .observeOn(observeOn)
+                    .subscribe(onComplete, onError)
     }
 
     fun clear() {

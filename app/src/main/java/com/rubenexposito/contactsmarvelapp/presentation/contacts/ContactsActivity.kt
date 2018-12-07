@@ -70,7 +70,7 @@ class ContactsActivity : AppCompatActivity(), ContactsContract.View {
 
     override fun addContacts(contacts: MutableList<Contact>) {
         rvContacts.show()
-        contactsAdapter.addContacts(contacts)
+        contactsAdapter.contacts = contacts
         contactsAdapter.notifyDataSetChanged()
     }
 

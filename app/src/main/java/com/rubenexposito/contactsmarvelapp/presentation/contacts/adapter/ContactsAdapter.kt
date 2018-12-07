@@ -28,11 +28,6 @@ class ContactsAdapter(private val callback: ContactListener, var contacts: Mutab
         itemView.setOnClickListener { callback.onContactSelected(contact) }
     }
 
-    fun addContacts(contacts: MutableList<Contact>) {
-        this.contacts.addAll(contacts)
-        this.contacts = this.contacts.sortedWith(compareBy { it.name }).toMutableList()
-    }
-
     fun updateContact(contact: Contact): Int {
         val indexOf = contacts.indexOf(contact)
         if (contacts.contains(contact)) {

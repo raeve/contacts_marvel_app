@@ -12,18 +12,8 @@ class ContactsPresenter(
     private val navigator: Navigator
 ) : ContactsContract.Presenter {
 
-    var contacts: MutableList<Contact> = ArrayList()
-
     override fun onCreate() {
         view.showLoading()
-        view.resetContacts()
-    }
-
-    override fun onContactsLoadedFromPhone(contacts: MutableList<Contact>) {
-        this.contacts = contacts
-
-        view.showLoading()
-        view.resetContacts()
         useCase.execute(::onComplete, ::onError)
     }
 
@@ -39,7 +29,7 @@ class ContactsPresenter(
     }
 
     internal fun onComplete(marvelContacts: MutableList<Contact>) {
-        contacts.addAll(marvelContacts)
+        val contacts = marvelContacts.sortedWith(compareBy { it.name }).toMutableList()
         view.addContacts(contacts)
         view.hideLoading()
     }
