@@ -7,6 +7,7 @@ import com.rubenexposito.contactsmarvelapp.presentation.amount.AmountActivity
 
 interface Navigator {
     fun showAmount(contacts: ArrayList<Contact>)
+    fun showSplit(contacts: ArrayList<Contact>, total: Double)
 }
 
 class NavigatorImpl(private val activity: Activity) : Navigator {
@@ -14,5 +15,9 @@ class NavigatorImpl(private val activity: Activity) : Navigator {
         val intent = Intent(activity, AmountActivity::class.java)
         intent.putParcelableArrayListExtra(AmountActivity.INTENT_KEY_CONTACTS, contacts)
         activity.startActivity(intent)
+    }
+
+    override fun showSplit(contacts: ArrayList<Contact>, total: Double) {
+        //TODO: Navigate to split screen
     }
 }
