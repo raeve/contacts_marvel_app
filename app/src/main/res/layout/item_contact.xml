@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools" android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:padding="16dp"
+              android:layout_height="84dp">
+
+    <FrameLayout android:layout_width="52dp" android:layout_height="52dp">
+
+        <ImageView
+                android:id="@+id/ivAvatar"
+                android:layout_width="52dp"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                tools:ignore="ContentDescription"/>
+
+        <ImageView
+                android:id="@+id/ivSelected"
+                android:visibility="gone"
+                android:layout_width="match_parent" android:layout_height="match_parent"
+                android:background="@drawable/background_circle_blue_transparent"
+                android:src="@drawable/ic_check_24dp"
+                android:padding="12dp" tools:ignore="ContentDescription"/>
+
+
+    </FrameLayout>
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:gravity="center_vertical"
+                  android:layout_marginStart="16dp"
+                  android:orientation="vertical">
+
+        <TextView android:id="@+id/tvName"
+                  android:maxLines="1"
+                  android:ellipsize="end"
+                  android:textColor="@color/white"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  tools:text="Pepe"/>
+
+        <TextView android:id="@+id/tvPhone"
+                  android:maxLines="1"
+                  android:ellipsize="end"
+                  android:visibility="gone"
+                  android:textColor="@color/grey"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  tools:text="612451525"/>
+
+    </LinearLayout>
+
+</LinearLayout>

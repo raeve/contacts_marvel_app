@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:background="@color/black"
+             tools:context=".presentation.contacts.ContactsActivity">
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvSelectedContacts"
+                android:layout_width="match_parent"
+                android:visibility="gone"
+                android:layout_height="120dp"/>
+
+        <include layout="@layout/divider_layout"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvContacts"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:paddingBottom="64dp"/>
+    </LinearLayout>
+
+    <include layout="@layout/layout_button_split"/>
+
+    <include layout="@layout/layout_loading"/>
+</FrameLayout>
