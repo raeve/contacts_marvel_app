@@ -9,5 +9,3 @@ build/
 local.properties
 
 *.iml
-
-app/src/main/java/com/rubenexposito/contactsmarvelapp/NetworkConfig.kt
