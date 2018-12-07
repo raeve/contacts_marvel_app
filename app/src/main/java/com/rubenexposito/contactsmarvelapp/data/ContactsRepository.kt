@@ -10,23 +10,21 @@ import com.karumi.dexter.listener.PermissionDeniedResponse
 import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.single.PermissionListener
-
 import com.rubenexposito.contactsmarvelapp.R
 import com.rubenexposito.contactsmarvelapp.domain.model.Contact
-import io.reactivex.Single
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.noButton
 import org.jetbrains.anko.toast
 import org.jetbrains.anko.yesButton
 
 interface ContactsRepository {
-    fun getPhoneContacts(): Single<MutableList<Contact>>
+    fun getPhoneContacts(): MutableList<Contact>
 }
 
 class ContactsRepositoryImpl(
     private val activity: AppCompatActivity
 ) : ContactsRepository {
-    override fun getPhoneContacts(): Single<MutableList<Contact>> = Single.just(mapCursor())
+    override fun getPhoneContacts(): MutableList<Contact> = mapCursor()
 
     init {
         Dexter.withActivity(activity)
@@ -56,7 +54,10 @@ class ContactsRepositoryImpl(
     }
 
     private fun handlePermissionRationale(token: PermissionToken?) {
-        activity.alert(R.string.permissions_read_contacts_rationale, R.string.permissions_read_contacts_title) {
+        activity.alert(
+            R.string.permissions_read_contacts_rationale,
+            R.string.permissions_read_contacts_title
+        ) {
             yesButton { dialog ->
                 dialog.dismiss()
                 token?.continuePermissionRequest()
@@ -98,8 +99,10 @@ class ContactsRepositoryImpl(
                 cursor.moveToFirst()
                 do {
                     val id = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID))
-                    val name = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME))
-                    val photo = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.PHOTO_URI))
+                    val name =
+                        cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME))
+                    val photo =
+                        cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.PHOTO_URI))
                     var phoneNumber: String? = null
                     if (cursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER) > 0) {
                         val phoneCursor: Cursor? = activity.contentResolver.query(
@@ -120,7 +123,13 @@ class ContactsRepositoryImpl(
                         }
                     }
 
-                    if (!phoneNumber.isNullOrBlank()) contacts.add(Contact(name, photo, phoneNumber))
+                    if (!phoneNumber.isNullOrBlank()) contacts.add(
+                        Contact(
+                            name,
+                            photo,
+                            phoneNumber
+                        )
+                    )
 
 
                 } while (cursor.moveToNext())

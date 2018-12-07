@@ -93,7 +93,7 @@ class ContactsActivity : AppCompatActivity(), ContactsContract.View {
     }
 
     override fun showLoading() {
-        srlContacts.isRefreshing = true
+        srlContacts.isRefreshing = false
         progressView.show()
     }
 
