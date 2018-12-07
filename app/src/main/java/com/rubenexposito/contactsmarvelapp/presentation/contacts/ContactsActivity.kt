@@ -5,17 +5,17 @@ import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.rubenexposito.contactsmarvelapp.R
 import com.rubenexposito.contactsmarvelapp.common.hide
 import com.rubenexposito.contactsmarvelapp.common.show
 import com.rubenexposito.contactsmarvelapp.domain.model.Contact
-import com.rubenexposito.contactsmarvelapp.presentation.contacts.adapter.ContactsAdapter
-import com.rubenexposito.contactsmarvelapp.presentation.contacts.adapter.SelectedContactsAdapter
+import com.rubenexposito.contactsmarvelapp.presentation.common.ContactsAdapter
+import com.rubenexposito.contactsmarvelapp.presentation.common.SelectedContactsAdapter
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_contacts.*
 import kotlinx.android.synthetic.main.divider_layout.*
 import kotlinx.android.synthetic.main.layout_button_split.*
+import kotlinx.android.synthetic.main.layout_empty.*
 import kotlinx.android.synthetic.main.layout_loading.*
 import javax.inject.Inject
 
@@ -85,6 +85,8 @@ class ContactsActivity : AppCompatActivity(), ContactsContract.View {
             this.contacts = contacts
             notifyDataSetChanged()
         }
+
+        showSelectedContacts()
     }
 
     override fun addOrRemoveContact(contact: Contact) {
@@ -96,15 +98,9 @@ class ContactsActivity : AppCompatActivity(), ContactsContract.View {
             } else {
                 notifyItemRemoved(position)
             }
-
-            if (itemCount > 0) {
-                rvSelectedContacts.show()
-                divider.show()
-            } else {
-                rvSelectedContacts.hide()
-                divider.hide()
-            }
         }
+
+        showSelectedContacts()
 
         with(contactsAdapter) {
             selectedContacts = selectedContactsAdapter.contacts
@@ -116,8 +112,19 @@ class ContactsActivity : AppCompatActivity(), ContactsContract.View {
         if (selectedContactsAdapter.itemCount > 0) btnSplit.show() else btnSplit.hide()
     }
 
+    fun showSelectedContacts() {
+        if (selectedContactsAdapter.itemCount > 0) {
+            rvSelectedContacts.show()
+            divider.show()
+        } else {
+            rvSelectedContacts.hide()
+            divider.hide()
+        }
+    }
+
     override fun showLoading() {
         srlContacts.isRefreshing = false
+        viewEmpty.hide()
         progressView.show()
     }
 
@@ -127,7 +134,11 @@ class ContactsActivity : AppCompatActivity(), ContactsContract.View {
     }
 
     override fun showError(@StringRes stringRes: Int) {
-        if (contactsAdapter.itemCount == 0) rvContacts.hide()
+        if (contactsAdapter.itemCount == 0) {
+            rvSelectedContacts.hide()
+            rvContacts.hide()
+            viewEmpty.show()
+        }
         Toast.makeText(this, stringRes, Toast.LENGTH_SHORT).show()
     }
 }

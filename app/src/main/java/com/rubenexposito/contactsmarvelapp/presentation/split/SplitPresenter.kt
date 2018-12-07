@@ -12,9 +12,4 @@ class SplitPresenter(private val view: SplitContract.View, private val navigator
     override fun updateContacts(contacts: List<Contact>) {
         view.updateContacts(contacts)
     }
-
-    override fun onSplitClicked() {
-        //TODO: Show end
-    }
-
 }

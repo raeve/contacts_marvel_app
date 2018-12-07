@@ -9,12 +9,11 @@ import com.rubenexposito.contactsmarvelapp.R
 import com.rubenexposito.contactsmarvelapp.common.show
 import com.rubenexposito.contactsmarvelapp.common.toPrice
 import com.rubenexposito.contactsmarvelapp.domain.model.Contact
-import com.rubenexposito.contactsmarvelapp.presentation.contacts.adapter.ContactsAdapter
+import com.rubenexposito.contactsmarvelapp.presentation.common.ContactsAdapter
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_split.*
 import kotlinx.android.synthetic.main.divider_layout.*
 import kotlinx.android.synthetic.main.item_contact.*
-import kotlinx.android.synthetic.main.layout_button_split.*
 import javax.inject.Inject
 
 class SplitActivity : AppCompatActivity(), SplitContract.View {
@@ -36,7 +35,6 @@ class SplitActivity : AppCompatActivity(), SplitContract.View {
 
     override fun updateAmount(amount: Double) {
         tvName.text = amount.toPrice()
-        btnSplit.text = getString(R.string.button_split_amount, amount.toPrice())
     }
 
     override fun updateContacts(contacts: List<Contact>) {
@@ -60,9 +58,6 @@ class SplitActivity : AppCompatActivity(), SplitContract.View {
             adapter = contactsAdapter
             layoutManager = LinearLayoutManager(context)
         }
-
-        btnSplit.show()
-        btnSplit.setOnClickListener { presenter.onSplitClicked() }
     }
 
     companion object {

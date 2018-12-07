@@ -11,6 +11,7 @@
     <string name="permissions_read_contacts_rationale">To display your contacts, allow the application to read your contacts</string>
     <string name="permissions_read_contacts_denied">To display your contacts, allow the application to read your contacts in the application\'s settings</string>
     <string name="error_could_not_retrieve_marvel_characters">Could not retieve Marvel characters</string>
+    <string name="error_empty_list">We couldn\'t find your contacts. Swipe from top to try again!</string>
     <string name="button_split_between">Split between %1$d</string>
     <string name="currency_eur">€</string>
     <string name="button_split_amount">Split %1$s</string>

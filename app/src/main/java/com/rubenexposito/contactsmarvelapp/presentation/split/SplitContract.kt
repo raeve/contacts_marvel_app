@@ -11,6 +11,5 @@ interface SplitContract {
     interface Presenter {
         fun updateAmount(amount: Double)
         fun updateContacts(contacts: List<Contact>)
-        fun onSplitClicked()
     }
 }

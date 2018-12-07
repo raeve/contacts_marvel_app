@@ -1,4 +1,4 @@
-package com.rubenexposito.contactsmarvelapp.presentation
+package com.rubenexposito.contactsmarvelapp.presentation.common
 
 import androidx.annotation.StringRes
 

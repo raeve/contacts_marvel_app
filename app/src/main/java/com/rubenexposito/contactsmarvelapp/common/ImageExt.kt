@@ -6,9 +6,18 @@ import com.squareup.picasso.Picasso
 
 fun ImageView.load(url: String?, name: String? = null) {
     if (!url.isNullOrBlank()) {
-        Picasso.get().load(url).placeholder(AvatarPlaceholder(name)).transform(CircleTransform()).into(this)
+        Picasso.get().load(url).placeholder(
+            AvatarPlaceholder(
+                name
+            )
+        ).transform(CircleTransform())
+            .into(this)
     } else {
-        Picasso.get().load(R.drawable.ic_person_24dp).placeholder(AvatarPlaceholder(name)).transform(CircleTransform())
+        Picasso.get().load(R.drawable.ic_person_24dp).placeholder(
+            AvatarPlaceholder(
+                name
+            )
+        ).transform(CircleTransform())
             .into(this)
     }
 }

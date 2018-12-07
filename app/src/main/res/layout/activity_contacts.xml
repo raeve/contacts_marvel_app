@@ -34,6 +34,6 @@
     </LinearLayout>
 
     <include layout="@layout/layout_button_split" />
-
+    <include layout="@layout/layout_empty" />
     <include layout="@layout/layout_loading" />
 </FrameLayout>

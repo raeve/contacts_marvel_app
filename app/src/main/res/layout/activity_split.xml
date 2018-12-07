@@ -17,10 +17,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvContacts"
-            style="@style/RecyclerPadding"/>
+            style="@style/RecyclerPadding" />
 
     </LinearLayout>
-
-    <include layout="@layout/layout_button_split" />
-
 </FrameLayout>

@@ -1,4 +1,4 @@
-package com.rubenexposito.contactsmarvelapp.presentation.contacts.adapter
+package com.rubenexposito.contactsmarvelapp.presentation.common
 
 import android.view.View
 import android.view.ViewGroup

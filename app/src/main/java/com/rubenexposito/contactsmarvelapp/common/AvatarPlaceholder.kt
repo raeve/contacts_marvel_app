@@ -94,7 +94,8 @@ class AvatarPlaceholder @JvmOverloads constructor(
 
     private fun calculateTextSize(): Float {
         if (textSizePercentage < 0 || textSizePercentage > 100) {
-            textSizePercentage = DEFAULT_TEXT_SIZE_PERCENTAGE
+            textSizePercentage =
+                    DEFAULT_TEXT_SIZE_PERCENTAGE
         }
         return bounds.height() * textSizePercentage.toFloat() / 100
     }

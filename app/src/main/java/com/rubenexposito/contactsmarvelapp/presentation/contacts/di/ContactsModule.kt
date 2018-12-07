@@ -10,9 +10,9 @@ import com.rubenexposito.contactsmarvelapp.domain.GetContactsUseCase
 import com.rubenexposito.contactsmarvelapp.presentation.contacts.ContactsActivity
 import com.rubenexposito.contactsmarvelapp.presentation.contacts.ContactsContract
 import com.rubenexposito.contactsmarvelapp.presentation.contacts.ContactsPresenter
-import com.rubenexposito.contactsmarvelapp.presentation.contacts.adapter.ContactListener
-import com.rubenexposito.contactsmarvelapp.presentation.contacts.adapter.ContactsAdapter
-import com.rubenexposito.contactsmarvelapp.presentation.contacts.adapter.SelectedContactsAdapter
+import com.rubenexposito.contactsmarvelapp.presentation.common.ContactListener
+import com.rubenexposito.contactsmarvelapp.presentation.common.ContactsAdapter
+import com.rubenexposito.contactsmarvelapp.presentation.common.SelectedContactsAdapter
 import dagger.Binds
 import dagger.Module
 import dagger.Provides

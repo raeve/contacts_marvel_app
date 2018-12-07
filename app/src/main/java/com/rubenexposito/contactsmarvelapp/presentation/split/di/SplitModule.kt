@@ -3,7 +3,7 @@ package com.rubenexposito.contactsmarvelapp.presentation.split.di
 import android.app.Activity
 import com.rubenexposito.contactsmarvelapp.Navigator
 import com.rubenexposito.contactsmarvelapp.di.PerActivity
-import com.rubenexposito.contactsmarvelapp.presentation.contacts.adapter.ContactsAdapter
+import com.rubenexposito.contactsmarvelapp.presentation.common.ContactsAdapter
 import com.rubenexposito.contactsmarvelapp.presentation.split.SplitActivity
 import com.rubenexposito.contactsmarvelapp.presentation.split.SplitContract
 import com.rubenexposito.contactsmarvelapp.presentation.split.SplitPresenter
