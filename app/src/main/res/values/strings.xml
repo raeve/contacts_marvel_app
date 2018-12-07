@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">ContactsMarvelApp</string>
+
+    <string name="contacts_title">Select</string>
+    <string name="amount_title">Total amount</string>
+    <string name="split_title">Split</string>
+
+
+    <string name="error_could_not_load_contacts">Could not load contacts from phone</string>
+    <string name="permissions_read_contacts_title">Read contacts permission</string>
+    <string name="permissions_read_contacts_rationale">To display your contacts, allow the application to read your contacts</string>
+    <string name="permissions_read_contacts_denied">To display your contacts, allow the application to read your contacts in the application\'s settings</string>
+    <string name="error_could_not_retrieve_marvel_characters">Could not retieve Marvel characters</string>
+    <string name="error_empty_list">We couldn\'t find your contacts. Swipe from top to try again!</string>
+    <string name="button_split_between">Split between %1$d</string>
+    <string name="currency_eur">€</string>
+    <string name="button_split_amount">Split %1$s</string>
+</resources>

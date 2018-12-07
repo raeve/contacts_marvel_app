@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="84dp"
+    android:orientation="horizontal"
+    android:padding="16dp">
+
+    <FrameLayout
+        android:id="@+id/flImage"
+        android:layout_width="52dp"
+        android:layout_height="52dp">
+
+        <ImageView
+            android:id="@+id/ivAvatar"
+            android:layout_width="52dp"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/ivSelected"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/background_circle_blue_transparent"
+            android:padding="12dp"
+            android:src="@drawable/ic_check_24dp"
+            android:visibility="gone"
+            tools:ignore="ContentDescription" />
+
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="16dp"
+        android:layout_toStartOf="@id/tvSplit"
+        android:layout_toEndOf="@id/flImage"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/white"
+            tools:text="Pepe" />
+
+        <TextView
+            android:id="@+id/tvPhone"
+            style="@style/TextSecondary"
+            tools:text="612451525" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvSplit"
+        style="@style/TextSecondary"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        tools:text="123€"
+        tools:visibility="visible" />
+
+</RelativeLayout>
