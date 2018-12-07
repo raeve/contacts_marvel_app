@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">ContactsMarvelApp</string>
 
-    <string name="contacts_title">Select contacts</string>
-    <string name="amount_title">Select amount</string>
+    <string name="contacts_title">Select</string>
+    <string name="amount_title">Total amount</string>
+    <string name="split_title">Split</string>
 
 
     <string name="error_could_not_load_contacts">Could not load contacts from phone</string>
