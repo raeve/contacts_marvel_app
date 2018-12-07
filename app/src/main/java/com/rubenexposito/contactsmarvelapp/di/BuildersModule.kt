@@ -1,6 +1,8 @@
 package com.rubenexposito.contactsmarvelapp.di
 
 import android.app.Activity
+import com.rubenexposito.contactsmarvelapp.presentation.amount.AmountActivity
+import com.rubenexposito.contactsmarvelapp.presentation.amount.di.AmountSubComponent
 import com.rubenexposito.contactsmarvelapp.presentation.contacts.ContactsActivity
 import com.rubenexposito.contactsmarvelapp.presentation.contacts.di.ContactsSubComponent
 import dagger.Binds
@@ -16,4 +18,9 @@ abstract class BuildersModule {
     @IntoMap
     @ActivityKey(ContactsActivity::class)
     abstract fun bindContactsActivityInjectorFactory(builder: ContactsSubComponent.Builder): AndroidInjector.Factory<out Activity>
+
+    @Binds
+    @IntoMap
+    @ActivityKey(AmountActivity::class)
+    abstract fun bindAmountActivityInjectorFactory(builder: AmountSubComponent.Builder): AndroidInjector.Factory<out Activity>
 }

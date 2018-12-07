@@ -2,47 +2,59 @@ package com.rubenexposito.contactsmarvelapp.presentation.amount
 
 import com.rubenexposito.contactsmarvelapp.Navigator
 import com.rubenexposito.contactsmarvelapp.common.removeLatestChar
+import com.rubenexposito.contactsmarvelapp.common.toDecimals
 import com.rubenexposito.contactsmarvelapp.domain.model.Contact
 
-class AmountPresenter(private val view: AmountContract.View, private val navigator: Navigator) : AmountContract.Presenter {
+class AmountPresenter(private val view: AmountContract.View, private val navigator: Navigator) :
+        AmountContract.Presenter {
 
     private lateinit var contacts: List<Contact>
 
     private var isDecimalActivated = false
     private var amount = ZERO
-    private var decimals = EMPTY
+    private var decimals = ""
 
     override fun updateContacts(contacts: List<Contact>) {
         this.contacts = contacts
     }
 
     override fun onNumberSelected(number: String) {
-        if(isDecimalActivated || number != ZERO) {
+        if (isDecimalActivated) {
+            updateDecimals(number)
+        } else {
             updateAmount(number)
         }
     }
 
     override fun onDotSelected() {
-        isDecimalActivated = true
+        if (amount != MAX) {
+            isDecimalActivated = true
+
+            view.updateDecimals(decimals.toDecimals(), isDecimalActivated)
+        }
     }
 
     override fun onBackspaceSelected() {
-        if(isDecimalActivated && decimals.isNotEmpty()) {
-            decimals.removeLatestChar()
+        if (isDecimalActivated) {
+            if (decimals.isNotEmpty()) decimals = decimals.removeLatestChar()
+            if (decimals.isEmpty()) isDecimalActivated = false
+
+            view.updateDecimals(decimals.toDecimals(), isDecimalActivated)
         } else if (!isDecimalActivated && amount != ZERO) {
-            amount.removeLatestChar()
-            if(amount.isEmpty()) {
+            amount = amount.removeLatestChar()
+            if (amount.isEmpty()) {
                 amount = ZERO
             }
+            view.updateAmount(amount)
         }
 
-        view.updateAmount(amount, decimals)
+        updateSplit()
     }
 
     override fun onSplitClicked() {
-        if(amount != ZERO) {
+        if (amount != ZERO) {
             var total = amount.toDouble()
-            if(decimals.isNotEmpty()){
+            if (decimals.isNotEmpty()) {
                 total += "0.$decimals".toDouble()
             }
 
@@ -50,21 +62,34 @@ class AmountPresenter(private val view: AmountContract.View, private val navigat
         }
     }
 
-    private fun updateAmount(number: String) {
-        if(isDecimalActivated && decimals.length < 2) {
+    private fun updateDecimals(number: String) {
+        if (decimals.length < 2) {
             decimals += number
-        }else if(amount.length < 3 || amount.length < 4 && amount == HUNDRED && decimals.isEmpty() && number == ONE){
-            amount = number + amount
         }
 
-        view.updateAmount(amount, decimals)
+        view.updateDecimals(decimals.toDecimals(), isDecimalActivated)
+        updateSplit()
+    }
+
+    private fun updateAmount(number: String) {
+        if (amount.length < 3 || (amount.length < 4 && amount == HUNDRED && decimals.isEmpty() && number == ZERO)) {
+            amount = if (amount == ZERO) number else amount + number
+        }
+
+        view.updateAmount(amount)
+        updateSplit()
+    }
+
+    private fun updateSplit() {
+        val split = "€$amount.${decimals.toDecimals()}"
+        if (split == SPLIT_EMPTY) view.disableSplit() else view.enableSplit(split)
     }
 
     companion object {
-        const val EMPTY = ""
         const val ZERO = "0"
-        const val ONE = "1"
         const val HUNDRED = "100"
+        const val MAX = "1000"
+        const val SPLIT_EMPTY = "€0.00"
 
     }
 }
