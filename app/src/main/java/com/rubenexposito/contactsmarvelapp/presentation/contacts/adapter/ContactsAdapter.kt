@@ -50,6 +50,6 @@ class ContactViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         tvSplit.text = contact.split.toPrice()
         if (tvPhone.text.isNotBlank()) tvPhone.show() else tvPhone.hide()
         if (contact.split != 0.0) tvSplit.show() else tvSplit.hide()
-        if (contact.selected) ivSelected.show() else ivSelected.hide()
+        if (contact.selected && contact.split == 0.0) ivSelected.show() else ivSelected.hide()
     }
 }

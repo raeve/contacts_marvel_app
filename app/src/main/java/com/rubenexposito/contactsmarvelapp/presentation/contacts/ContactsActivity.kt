@@ -37,10 +37,6 @@ class ContactsActivity : AppCompatActivity(), ContactsContract.View {
         setContentView(R.layout.activity_contacts)
         AndroidInjection.inject(this)
         initView()
-    }
-
-    override fun onResume() {
-        super.onResume()
         presenter.onCreate()
     }
 
@@ -50,6 +46,8 @@ class ContactsActivity : AppCompatActivity(), ContactsContract.View {
     }
 
     private fun initView() {
+        srlContacts.setOnRefreshListener { presenter.onCreate() }
+
         with(rvContacts) {
             adapter = contactsAdapter
             layoutManager = LinearLayoutManager(context)
@@ -95,10 +93,12 @@ class ContactsActivity : AppCompatActivity(), ContactsContract.View {
     }
 
     override fun showLoading() {
+        srlContacts.isRefreshing = true
         progressView.show()
     }
 
     override fun hideLoading() {
+        srlContacts.isRefreshing = false
         progressView.hide()
     }
 
