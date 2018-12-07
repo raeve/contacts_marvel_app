@@ -2,22 +2,20 @@ package com.rubenexposito.contactsmarvelapp.presentation.contacts
 
 import com.rubenexposito.contactsmarvelapp.Navigator
 import com.rubenexposito.contactsmarvelapp.R
-import com.rubenexposito.contactsmarvelapp.domain.GetContactsUseCase
+import com.rubenexposito.contactsmarvelapp.domain.interactor.GetContactsUseCase
 import com.rubenexposito.contactsmarvelapp.domain.model.Contact
 import retrofit2.HttpException
 
 class ContactsPresenter(
-    private val view: ContactsContract.View,
-    private val useCase: GetContactsUseCase,
-    private val navigator: Navigator
+        private val view: ContactsContract.View,
+        private val useCase: GetContactsUseCase,
+        private val navigator: Navigator
 ) : ContactsContract.Presenter {
     var offset = 0
 
     override fun onPause() = useCase.clear()
 
-    override fun onSplitBetweenClicked(contacts: MutableList<Contact>) {
-        navigator.showAmount(contacts as ArrayList<Contact>)
-    }
+    override fun onSplitBetweenClicked(contacts: MutableList<Contact>) = navigator.showAmount(contacts as ArrayList<Contact>)
 
     override fun onContactSelected(contact: Contact) {
         contact.selected = !contact.selected

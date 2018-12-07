@@ -79,7 +79,7 @@ class ContactsActivity : AppCompatActivity(), ContactsContract.View {
             selectedContacts = selectedContactsAdapter.contacts
             val position = this.contacts.size
             this.addContacts(contacts)
-            notifyDataSetChanged()
+            notifyItemRangeInserted(position, contacts.size)
         }
     }
 

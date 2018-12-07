@@ -4,13 +4,10 @@ import com.rubenexposito.contactsmarvelapp.NetworkConfig
 import com.rubenexposito.contactsmarvelapp.common.md5
 import com.rubenexposito.contactsmarvelapp.data.network.MarvelApi
 import com.rubenexposito.contactsmarvelapp.domain.model.Contact
-import com.rubenexposito.contactsmarvelapp.domain.model.ContactMapper
+import com.rubenexposito.contactsmarvelapp.data.mapper.ContactMapper
+import com.rubenexposito.contactsmarvelapp.domain.MarvelRepository
 import io.reactivex.Single
 import java.util.*
-
-interface MarvelRepository {
-    fun getCharacters(limit: Int, offset: Int): Single<MutableList<Contact>>
-}
 
 class MarvelRepositoryImpl(private val marvelApi: MarvelApi, private val contactMapper: ContactMapper) :
     MarvelRepository {

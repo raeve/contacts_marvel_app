@@ -11,7 +11,7 @@ interface AmountContract {
 
         fun updateDecimals(decimals: String, visible: Boolean)
 
-        fun enableSplit(text: String)
+        fun enableSplit(bill: String)
 
         fun disableSplit()
     }

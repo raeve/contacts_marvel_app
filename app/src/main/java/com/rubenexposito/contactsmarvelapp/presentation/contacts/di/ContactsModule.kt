@@ -2,11 +2,11 @@ package com.rubenexposito.contactsmarvelapp.presentation.contacts.di
 
 import android.app.Activity
 import com.rubenexposito.contactsmarvelapp.Navigator
-import com.rubenexposito.contactsmarvelapp.data.ContactsRepository
 import com.rubenexposito.contactsmarvelapp.data.ContactsRepositoryImpl
-import com.rubenexposito.contactsmarvelapp.data.MarvelRepository
 import com.rubenexposito.contactsmarvelapp.di.PerActivity
-import com.rubenexposito.contactsmarvelapp.domain.GetContactsUseCase
+import com.rubenexposito.contactsmarvelapp.domain.ContactsRepository
+import com.rubenexposito.contactsmarvelapp.domain.MarvelRepository
+import com.rubenexposito.contactsmarvelapp.domain.interactor.GetContactsUseCase
 import com.rubenexposito.contactsmarvelapp.presentation.contacts.ContactsActivity
 import com.rubenexposito.contactsmarvelapp.presentation.contacts.ContactsContract
 import com.rubenexposito.contactsmarvelapp.presentation.contacts.ContactsPresenter
@@ -49,7 +49,13 @@ abstract class ContactsModule {
             contactsRepository: ContactsRepository,
             @Named("observeOn") observeOn: Scheduler,
             @Named("subscribeOn") subscribeOn: Scheduler
-        ): GetContactsUseCase = GetContactsUseCase(marvelRepository, contactsRepository, observeOn, subscribeOn)
+        ): GetContactsUseCase =
+            GetContactsUseCase(
+                marvelRepository,
+                contactsRepository,
+                observeOn,
+                subscribeOn
+            )
 
         @Provides
         @PerActivity

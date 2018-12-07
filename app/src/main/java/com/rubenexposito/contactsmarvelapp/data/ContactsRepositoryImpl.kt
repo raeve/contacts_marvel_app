@@ -11,15 +11,12 @@ import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.single.PermissionListener
 import com.rubenexposito.contactsmarvelapp.R
+import com.rubenexposito.contactsmarvelapp.domain.ContactsRepository
 import com.rubenexposito.contactsmarvelapp.domain.model.Contact
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.noButton
 import org.jetbrains.anko.toast
 import org.jetbrains.anko.yesButton
-
-interface ContactsRepository {
-    fun getPhoneContacts(): MutableList<Contact>
-}
 
 class ContactsRepositoryImpl(
     private val activity: AppCompatActivity

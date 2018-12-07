@@ -3,7 +3,7 @@ package com.rubenexposito.contactsmarvelapp.presentation.contacts
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.verify
 import com.rubenexposito.contactsmarvelapp.Navigator
-import com.rubenexposito.contactsmarvelapp.domain.GetContactsUseCase
+import com.rubenexposito.contactsmarvelapp.domain.interactor.GetContactsUseCase
 import com.rubenexposito.contactsmarvelapp.domain.model.Contact
 import org.junit.Before
 import org.junit.Test
@@ -31,6 +31,26 @@ class ContactsPresenterTest {
     }
 
     @Test
+    fun `should clear use case when on pause`() {
+        presenter.onPause()
+        verify(useCase).clear()
+    }
+
+    @Test
+    fun `should navigate to amount view when click split`() {
+        val contacts = givenContacts()
+
+        presenter.onSplitBetweenClicked(contacts)
+        verify(navigator).showAmount(contacts as ArrayList<Contact>)
+    }
+
+    @Test
+    fun `should add or remove contact on contact select`() {
+        presenter.onContactSelected(Contact("",""))
+        verify(view).addOrRemoveContact(Contact("",""))
+    }
+
+    @Test
     fun `should show loading after load contacts from phone`() {
         presenter.loadContacts(false)
         verify(view).showLoading()
@@ -40,12 +60,6 @@ class ContactsPresenterTest {
     fun `should request data after load contacts from phone`() {
         presenter.loadContacts(false)
         verify(useCase).execute(any(), any(), any(), any())
-    }
-
-    @Test
-    fun `should clear use case when on pause`() {
-        presenter.onPause()
-        verify(useCase).clear()
     }
 
     @Test
@@ -65,14 +79,8 @@ class ContactsPresenterTest {
         verify(view).hideLoading()
     }
 
-    @Test
-    fun `should navigate to amount view when click split`() {
-        val contacts = givenContacts()
-
-        presenter.onSplitBetweenClicked(contacts)
-        verify(navigator).showAmount(contacts as ArrayList<Contact>)
-    }
-
-    private fun givenContacts(): MutableList<Contact> = listOf(Contact("", "")).toMutableList()
+    private fun givenContacts(): MutableList<Contact> = listOf(
+        Contact("", "")
+    ).toMutableList()
 
 }

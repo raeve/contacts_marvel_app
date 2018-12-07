@@ -71,11 +71,11 @@ class AmountActivity : AppCompatActivity(), AmountContract.View, View.OnClickLis
         if(visible) tvDecimals.show() else tvDecimals.hide()
     }
 
-    override fun enableSplit(split: String) {
+    override fun enableSplit(bill: String) {
         with(btnSplit) {
             background = getDrawable(R.drawable.background_button_blue)
             textColor = getColor(R.color.white)
-            text = getString(R.string.button_split_amount, split)
+            text = getString(R.string.button_split_amount, bill)
             isEnabled = true
         }
     }
