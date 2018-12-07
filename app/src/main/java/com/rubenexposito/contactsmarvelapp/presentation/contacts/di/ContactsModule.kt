@@ -68,7 +68,7 @@ abstract class ContactsModule {
         @Provides
         @PerActivity
         @JvmStatic
-        fun provideContactsAdapter(listener: ContactListener) = ContactsAdapter(listener)
+        fun provideContactsAdapter(listener: ContactListener?) = ContactsAdapter(listener)
 
         @Provides
         @PerActivity

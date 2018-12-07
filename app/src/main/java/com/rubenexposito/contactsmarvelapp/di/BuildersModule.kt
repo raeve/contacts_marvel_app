@@ -5,6 +5,8 @@ import com.rubenexposito.contactsmarvelapp.presentation.amount.AmountActivity
 import com.rubenexposito.contactsmarvelapp.presentation.amount.di.AmountSubComponent
 import com.rubenexposito.contactsmarvelapp.presentation.contacts.ContactsActivity
 import com.rubenexposito.contactsmarvelapp.presentation.contacts.di.ContactsSubComponent
+import com.rubenexposito.contactsmarvelapp.presentation.split.SplitActivity
+import com.rubenexposito.contactsmarvelapp.presentation.split.di.SplitSubComponent
 import dagger.Binds
 import dagger.Module
 import dagger.android.ActivityKey
@@ -23,4 +25,9 @@ abstract class BuildersModule {
     @IntoMap
     @ActivityKey(AmountActivity::class)
     abstract fun bindAmountActivityInjectorFactory(builder: AmountSubComponent.Builder): AndroidInjector.Factory<out Activity>
+
+    @Binds
+    @IntoMap
+    @ActivityKey(SplitActivity::class)
+    abstract fun bindSplitActivityInjectorFactory(builder: SplitSubComponent.Builder): AndroidInjector.Factory<out Activity>
 }

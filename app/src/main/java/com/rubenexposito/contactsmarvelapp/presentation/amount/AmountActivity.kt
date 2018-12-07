@@ -54,7 +54,7 @@ class AmountActivity : AppCompatActivity(), AmountContract.View, View.OnClickLis
 
     private fun initView() {
         disableSplit()
-        btnSplit.visibility = View.VISIBLE
+        btnSplit.show()
     }
 
     override fun updateAmount(amount: String) {

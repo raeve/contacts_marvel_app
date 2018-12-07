@@ -3,29 +3,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:animateLayoutChanges="true"
     android:background="@color/black"
-    tools:context=".presentation.contacts.ContactsActivity">
+    tools:context=".presentation.split.SplitActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvSelectedContacts"
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:visibility="gone" />
+        <include layout="@layout/item_contact" />
 
         <include layout="@layout/divider_layout" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvContacts"
-            style="@style/RecyclerPadding" />
+            style="@style/RecyclerPadding"/>
+
     </LinearLayout>
 
     <include layout="@layout/layout_button_split" />
 
-    <include layout="@layout/layout_loading" />
 </FrameLayout>

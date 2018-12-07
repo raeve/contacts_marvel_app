@@ -55,7 +55,12 @@ class AmountPresenter(private val view: AmountContract.View, private val navigat
         if (amount != ZERO) {
             var total = amount.toDouble()
             if (decimals.isNotEmpty()) {
-                total += "0.$decimals".toDouble()
+                total += "0.${decimals.toDecimals()}".toDouble()
+            }
+
+            for(contact in contacts) {
+                contact.selected = false
+                contact.split = total/contacts.size
             }
 
             navigator.showSplit(contacts as ArrayList<Contact>, total)

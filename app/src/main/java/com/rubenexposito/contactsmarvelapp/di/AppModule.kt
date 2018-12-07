@@ -4,6 +4,7 @@ import android.content.Context
 import com.rubenexposito.contactsmarvelapp.BaseApplication
 import com.rubenexposito.contactsmarvelapp.presentation.amount.di.AmountSubComponent
 import com.rubenexposito.contactsmarvelapp.presentation.contacts.di.ContactsSubComponent
+import com.rubenexposito.contactsmarvelapp.presentation.split.di.SplitSubComponent
 import dagger.Module
 import dagger.Provides
 import io.reactivex.Scheduler
@@ -12,7 +13,7 @@ import io.reactivex.schedulers.Schedulers
 import javax.inject.Named
 
 @Module(
-    subcomponents = [ContactsSubComponent::class, AmountSubComponent::class]
+    subcomponents = [ContactsSubComponent::class, AmountSubComponent::class, SplitSubComponent::class]
 )
 class AppModule {
 
