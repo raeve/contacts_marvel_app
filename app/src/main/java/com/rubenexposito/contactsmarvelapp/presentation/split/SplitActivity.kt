@@ -7,9 +7,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rubenexposito.contactsmarvelapp.R
 import com.rubenexposito.contactsmarvelapp.common.show
+import com.rubenexposito.contactsmarvelapp.common.toPrice
 import com.rubenexposito.contactsmarvelapp.domain.model.Contact
 import com.rubenexposito.contactsmarvelapp.presentation.contacts.adapter.ContactsAdapter
+import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_split.*
+import kotlinx.android.synthetic.main.divider_layout.*
 import kotlinx.android.synthetic.main.item_contact.*
 import kotlinx.android.synthetic.main.layout_button_split.*
 import javax.inject.Inject
@@ -25,13 +28,15 @@ class SplitActivity : AppCompatActivity(), SplitContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_split)
+        AndroidInjection.inject(this)
+
         initExtra()
         initView()
     }
 
     override fun updateAmount(amount: Double) {
-        val text = "€$amount"
-        tvName.text = text
+        tvName.text = amount.toPrice()
+        btnSplit.text = getString(R.string.button_split_amount, amount.toPrice())
     }
 
     override fun updateContacts(contacts: List<Contact>) {
@@ -48,6 +53,8 @@ class SplitActivity : AppCompatActivity(), SplitContract.View {
 
     private fun initView() {
         ivAvatar.setImageDrawable(getDrawable(R.drawable.ic_call_split_24dp))
+
+        divider.show()
 
         with(rvContacts) {
             adapter = contactsAdapter
