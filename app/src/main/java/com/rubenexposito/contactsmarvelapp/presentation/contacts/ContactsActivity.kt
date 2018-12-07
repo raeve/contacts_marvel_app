@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.rubenexposito.contactsmarvelapp.R
 import com.rubenexposito.contactsmarvelapp.common.hide
 import com.rubenexposito.contactsmarvelapp.common.show
-import com.rubenexposito.contactsmarvelapp.data.ContactsRepository
 import com.rubenexposito.contactsmarvelapp.domain.model.Contact
 import com.rubenexposito.contactsmarvelapp.presentation.contacts.adapter.ContactsAdapter
 import com.rubenexposito.contactsmarvelapp.presentation.contacts.adapter.SelectedContactsAdapter
@@ -20,9 +19,6 @@ import kotlinx.android.synthetic.main.layout_loading.*
 import javax.inject.Inject
 
 class ContactsActivity : AppCompatActivity(), ContactsContract.View {
-    @Inject
-    lateinit var contactsRepository: ContactsRepository
-
     @Inject
     lateinit var presenter: ContactsContract.Presenter
 
