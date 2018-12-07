@@ -70,11 +70,16 @@ class ContactsActivity : AppCompatActivity(), ContactsContract.View {
     }
 
     override fun addOrRemoveContact(contact: Contact) {
-        with(selectedContactsAdapter){
+        with(selectedContactsAdapter) {
             val position = addOrRemoveContact(contact)
-            if(position == -1) notifyItemInserted(0) else notifyItemRemoved(position)
+            if (position == -1) {
+                notifyItemInserted(0)
+                rvSelectedContacts.scrollToPosition(0)
+            } else {
+                notifyItemRemoved(position)
+            }
 
-            if(itemCount > 0) {
+            if (itemCount > 0) {
                 rvSelectedContacts.show()
                 divider.show()
             } else {
@@ -83,9 +88,10 @@ class ContactsActivity : AppCompatActivity(), ContactsContract.View {
             }
         }
 
-        with(contactsAdapter){
+        with(contactsAdapter) {
             selectedContacts = selectedContactsAdapter.contacts
-            notifyItemChanged(updateContact(contact))
+            val position = updateContact(contact)
+            notifyItemChanged(position)
         }
 
         btnSplit.text = getString(R.string.button_split_between, selectedContactsAdapter.itemCount)
